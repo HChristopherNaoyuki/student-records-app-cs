@@ -1,0 +1,172 @@
+﻿<Window x:Class="student_records_app_cs.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:student_records_app_cs"
+        mc:Ignorable="d"
+        Title="Student Records Management" 
+        Height="500" 
+        Width="800"
+        WindowStartupLocation="CenterScreen">
+    <!-- 
+        Main application window definition
+        - Title: Application title
+        - Size: Default height/width
+        - Startup location: Centers on screen
+    -->
+
+    <Grid Margin="10">
+        <!-- 
+            Main container grid with two columns:
+            - Left column (narrower): Student list
+            - Right column (wider): Student details form
+        -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Student List Section (Left Column) -->
+        <GroupBox Grid.Column="0" Header="Student List" Margin="0,0,10,0">
+            <!-- 
+                GroupBox container for the student list section
+                - Header: Descriptive title
+                - Margin: Spacing from right edge
+            -->
+
+            <DockPanel>
+                <!-- 
+                    DockPanel layout with button at bottom and list filling remaining space
+                -->
+
+                <!-- Add Student Button (Docked at Bottom) -->
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,10,0,0">
+                    <!-- 
+                        StackPanel container for the add button
+                        - Margin: Spacing above the button
+                    -->
+                    <Button x:Name="AddStudentButton" 
+                            Content="Add New Student" 
+                            Height="30" 
+                            Click="AddStudentButton_Click"/>
+                    <!-- 
+                        Button to add new students
+                        - Name: Referenced in code-behind
+                        - Height: Fixed button height
+                        - Click: Event handler method
+                    -->
+                </StackPanel>
+
+                <!-- Student ListBox -->
+                <ListBox x:Name="StudentsListBox" 
+                         SelectionChanged="StudentsListBox_SelectionChanged"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="Id">
+                    <!-- 
+                        ListBox to display all students
+                        - Name: Referenced in code-behind
+                        - SelectionChanged: Event handler when selection changes
+                        - DisplayMemberPath: Shows student names in list
+                        - SelectedValuePath: Uses student ID as selection value
+                    -->
+                </ListBox>
+            </DockPanel>
+        </GroupBox>
+
+        <!-- Student Details Section (Right Column) -->
+        <GroupBox Grid.Column="1" Header="Student Details">
+            <!-- 
+                GroupBox container for student details form
+                - Header: Descriptive title
+            -->
+
+            <Grid Margin="10">
+                <!-- 
+                    Grid layout for form elements with rows and columns
+                    - Margin: Internal spacing
+                -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- ID Row -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Name Row -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Age Row -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Grade Row -->
+                    <RowDefinition Height="*"/>
+                    <!-- Spacer Row -->
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Label Column -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Input Column -->
+                </Grid.ColumnDefinitions>
+
+                <!-- ID Field -->
+                <Label Grid.Row="0" Grid.Column="0" Content="ID:" Margin="5"/>
+                <!-- 
+                    Label for ID field
+                    - Grid position: Row 0, Column 0
+                    - Margin: Spacing around label
+                -->
+
+                <TextBox x:Name="IdTextBox" 
+                         Grid.Row="0" Grid.Column="1" 
+                         Margin="5" 
+                         IsReadOnly="False"
+                         ToolTip="Unique student identifier">
+                    <!-- 
+                        TextBox for student ID
+                        - Name: Referenced in code-behind
+                        - Grid position: Row 0, Column 1
+                        - Margin: Spacing around control
+                        - ReadOnly: False (editable)
+                        - ToolTip: Help text on hover
+                    -->
+                </TextBox>
+
+                <!-- Name Field -->
+                <Label Grid.Row="1" Grid.Column="0" Content="Name:" Margin="5"/>
+                <TextBox x:Name="NameTextBox" 
+                         Grid.Row="1" Grid.Column="1" 
+                         Margin="5"
+                         ToolTip="Student's full name"/>
+
+                <!-- Age Field -->
+                <Label Grid.Row="2" Grid.Column="0" Content="Age:" Margin="5"/>
+                <TextBox x:Name="AgeTextBox" 
+                         Grid.Row="2" Grid.Column="1" 
+                         Margin="5"
+                         ToolTip="Student's age (5-120)"/>
+
+                <!-- Grade Field -->
+                <Label Grid.Row="3" Grid.Column="0" Content="Grade:" Margin="5"/>
+                <TextBox x:Name="GradeTextBox" 
+                         Grid.Row="3" Grid.Column="1" 
+                         Margin="5"
+                         ToolTip="Student's current grade"/>
+
+                <!-- Save Button -->
+                <Button x:Name="SaveButton" 
+                        Grid.Row="4" Grid.Column="1" 
+                        Content="Save Changes" 
+                        Height="30" 
+                        Width="120"
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Bottom"
+                        Margin="5" 
+                        Click="SaveButton_Click"/>
+                <!-- 
+                    Button to save student changes
+                    - Grid position: Row 4, Column 1 (bottom right)
+                    - Fixed height and width
+                    - Alignment: Right in column
+                    - Click: Event handler method
+                -->
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
